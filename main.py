@@ -21,7 +21,7 @@ def index():
 
 
 @app.route("/welcome", methods=['POST'])
-def welcome():
+def welcome():  
     error1 = ''
     error2 = ''
     error3 = ''
@@ -38,12 +38,18 @@ def welcome():
     if len(user) > 20 or len(user) < 3:
         error1 = 'Must be between 3 and 20 characters'
     if len(password) > 20 or len(password) < 3:
-        error2 = 'Must be between 3 and 20 characters'
+        error2 = 'Must be between 3user and 20 characters'
     if len(verify) > 20 or len(verify) < 3:
         error3 = 'Must be between 3 and 20 characters'
     if len(email) > 0: 
         if len(email) > 20 or len(email) < 3:
             error4 = 'Must be between 3 and 20 characters'
+    for character in user:
+        if character == ' ':
+            error1 = 'No spaces in username'
+    for character in password:
+        if character == ' ':
+            error2 = 'No spaces in passwords'    
     if password != verify:
         error3 = "Passwords do not match!"
     if user == '':
@@ -58,7 +64,7 @@ def welcome():
             for character in email:
                 if character == ' ':
                     validEmail = False
-                    emailError = 'No Spaces in Emails'
+                    emailError = 'No spaces in emails'
                 if character == '@':
                     andCount +=1
                     if andCount > 1:
